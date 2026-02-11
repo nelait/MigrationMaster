@@ -1,0 +1,133 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String      @id @default(uuid())
+  username     String      @unique
+  passwordHash String
+  createdAt    DateTime    @default(now())
+  migrations   Migration[]
+  llmConfigs   LlmConfig[]
+  githubConfig GitHubConfig?
+  referenceDocuments ReferenceDocument[]
+}
+
+model Migration {
+  id           String         @id @default(uuid())
+  userId       String
+  name         String?
+  selectedPath String
+  status       String         @default("created")
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  user         User           @relation(fields: [userId], references: [id])
+  files        UploadedFile[]
+  artifacts    Artifact[]
+  evaluations  Evaluation[]
+  generatedCode GeneratedCode[]
+  llmUsages    LlmUsage[]
+}
+
+model UploadedFile {
+  id          String    @id @default(uuid())
+  migrationId String
+  filename    String
+  content     String
+  createdAt   DateTime  @default(now())
+  migration   Migration @relation(fields: [migrationId], references: [id])
+}
+
+model Artifact {
+  id          String    @id @default(uuid())
+  migrationId String
+  type        String
+  title       String
+  content     String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  migration   Migration @relation(fields: [migrationId], references: [id])
+}
+
+model GeneratedCode {
+  id          String    @id @default(uuid())
+  migrationId String
+  filename    String
+  content     String
+  explanation String    @default("")
+  createdAt   DateTime  @default(now())
+  migration   Migration @relation(fields: [migrationId], references: [id])
+}
+
+model Evaluation {
+  id          String    @id @default(uuid())
+  migrationId String
+  metrics     String    // JSON string
+  createdAt   DateTime  @default(now())
+  migration   Migration @relation(fields: [migrationId], references: [id])
+}
+
+model LlmConfig {
+  id        String   @id @default(uuid())
+  userId    String
+  provider  String   // openai, anthropic, google, ollama
+  label     String
+  apiKey    String   @default("")
+  model     String
+  baseUrl   String   @default("")
+  activeFor String   @default("")  // comma-separated stages: analyze,generate,evaluate
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model GitHubConfig {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  token     String
+  owner     String   // GitHub org or username
+  repo      String
+  branch    String   @default("main")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model LlmUsage {
+  id          String    @id @default(uuid())
+  migrationId String
+  stage       String    // "analyze", "generate", "evaluate"
+  provider    String
+  model       String
+  label       String
+  createdAt   DateTime  @default(now())
+  migration   Migration @relation(fields: [migrationId], references: [id])
+}
+
+model ReferenceDocument {
+  id        String           @id @default(uuid())
+  userId    String
+  name      String
+  type      String           // coding_standards, db_schema, api_spec, design_guide, other
+  content   String           // full original text
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  user      User             @relation(fields: [userId], references: [id])
+  chunks    DocumentChunk[]
+}
+
+model DocumentChunk {
+  id         String             @id @default(uuid())
+  documentId String
+  chunkIndex Int
+  content    String
+  embedding  Unsupported("vector(1536)")?
+  createdAt  DateTime           @default(now())
+  document   ReferenceDocument  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+}
+

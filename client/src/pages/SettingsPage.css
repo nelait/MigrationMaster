@@ -1,0 +1,579 @@
+.settings-page {
+    padding: 32px;
+    max-width: 960px;
+}
+
+.settings-page .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.settings-page .page-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.settings-page .page-subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+/* ── LLM Config Cards ─────────────────────── */
+.llm-configs-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.llm-config-card {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.llm-config-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.llm-config-card.active {
+    border-color: var(--accent-primary);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.06), rgba(118, 75, 162, 0.03));
+}
+
+.llm-config-card.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: 12px 12px 0 0;
+}
+
+.config-provider-icon {
+    font-size: 2rem;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-secondary);
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.config-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.config-details h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.config-provider-name {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-bottom: 6px;
+}
+
+.config-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.config-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.config-meta-item code {
+    background: var(--surface-secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.config-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.config-badge.active {
+    background: rgba(39, 174, 96, 0.15);
+    color: #27ae60;
+}
+
+.config-badge.inactive {
+    background: var(--surface-secondary);
+    color: var(--text-muted);
+}
+
+/* ── Stage Chips ─────────────────────────── */
+.config-stages {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.stage-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    border: 1px solid var(--border-primary);
+    background: var(--surface-secondary);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font, inherit);
+}
+
+.stage-chip:hover {
+    border-color: var(--accent-primary);
+    color: var(--text-secondary);
+    background: rgba(102, 126, 234, 0.06);
+}
+
+.stage-chip-active {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.12));
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.stage-chip-active:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.25), rgba(118, 75, 162, 0.2));
+}
+
+.config-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.config-actions .btn {
+    padding: 6px 12px;
+    font-size: 0.82rem;
+}
+
+/* ── Empty State ──────────────────────────── */
+.no-configs {
+    text-align: center;
+    padding: 60px 24px;
+    background: var(--surface-primary);
+    border: 2px dashed var(--border-primary);
+    border-radius: 16px;
+    margin-bottom: 32px;
+}
+
+.no-configs-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.no-configs h3 {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.no-configs p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Add/Edit Modal ───────────────────────── */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 520px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    animation: slideUp 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.modal-header h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border-primary);
+}
+
+/* ── Provider Selector ────────────────────── */
+.provider-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.provider-option {
+    background: var(--surface-secondary);
+    border: 2px solid var(--border-primary);
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.provider-option:hover {
+    border-color: var(--border-hover);
+}
+
+.provider-option.selected {
+    border-color: var(--accent-primary);
+    background: rgba(102, 126, 234, 0.08);
+}
+
+.provider-option-icon {
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+}
+
+.provider-option-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.provider-option-desc {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* ── Form Field ───────────────────────────── */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-field label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.form-field label .optional {
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+.form-field input,
+.form-field select {
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    transition: border-color 0.2s;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.form-field select {
+    cursor: pointer;
+}
+
+/* ── Test Result ──────────────────────────── */
+.test-result {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+}
+
+.test-result.success {
+    background: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+}
+
+.test-result.error {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+/* ── Info Banner ──────────────────────────── */
+.info-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(102, 126, 234, 0.06);
+    border: 1px solid rgba(102, 126, 234, 0.15);
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+
+.info-banner-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.info-banner-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.info-banner-text strong {
+    color: var(--text-primary);
+}
+
+/* ── Animations ───────────────────────────── */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Section Divider & GitHub Section ─────── */
+.section-divider {
+    height: 1px;
+    background: var(--border-primary);
+    margin: 36px 0 28px;
+}
+
+.section-header {
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+.github-config-card {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.2s ease;
+}
+
+.github-config-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.gh-connected-header {
+    margin-bottom: 16px;
+}
+
+.gh-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.gh-status-badge.connected {
+    background: rgba(39, 174, 96, 0.15);
+    color: #27ae60;
+}
+
+.gh-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.gh-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.gh-detail-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.gh-detail-item code {
+    background: var(--surface-secondary);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-family: 'Fira Code', monospace;
+    color: var(--text-primary);
+}
+
+.gh-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.gh-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.gh-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-hint {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    display: block;
+}
+
+.form-hint a {
+    color: var(--accent-primary);
+    text-decoration: none;
+}
+
+.form-hint a:hover {
+    text-decoration: underline;
+}
+
+.form-hint code {
+    background: var(--surface-secondary);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.76rem;
+}

@@ -1,0 +1,109 @@
+/* ── MermaidDiagram Component ── */
+
+.mermaid-container {
+    background: var(--bg-primary, #0f172a);
+    border: 1px solid var(--border, #334155);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.mermaid-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--bg-secondary, #1e293b);
+    border-bottom: 1px solid var(--border, #334155);
+}
+
+.mermaid-toolbar-label {
+    font-size: 0.78rem;
+    color: var(--text-muted, #64748b);
+    font-weight: 500;
+    margin-right: auto;
+}
+
+.mermaid-zoom-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid var(--border, #334155);
+    background: var(--bg-primary, #0f172a);
+    color: var(--text-secondary, #94a3b8);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    line-height: 1;
+}
+
+.mermaid-zoom-btn:hover {
+    background: var(--bg-hover, #334155);
+    color: var(--text-primary, #f1f5f9);
+    border-color: var(--accent, #6366f1);
+}
+
+.mermaid-diagram {
+    padding: 28px 20px;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    overflow: auto;
+}
+
+.mermaid-diagram svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ── Error State ── */
+
+.mermaid-error {
+    background: rgba(239, 68, 68, 0.06);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.mermaid-error-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.mermaid-error-text strong {
+    color: #ef4444;
+    font-size: 0.95rem;
+}
+
+.mermaid-error-text p {
+    color: var(--text-muted, #64748b);
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+.mermaid-error-details {
+    margin-top: 16px;
+}
+
+.mermaid-error-details summary {
+    cursor: pointer;
+    font-size: 0.82rem;
+    color: var(--text-secondary, #94a3b8);
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.mermaid-error-details pre {
+    background: var(--bg-primary, #0f172a);
+    border: 1px solid var(--border, #334155);
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 0.8rem;
+    color: var(--text-secondary, #94a3b8);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
